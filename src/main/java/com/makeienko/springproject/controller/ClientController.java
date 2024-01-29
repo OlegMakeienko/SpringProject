@@ -1,15 +1,15 @@
 package com.makeienko.springproject.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.makeienko.springproject.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/")
-public class MyController {
+@RequestMapping("/client")
+public class ClientController {
 
     @GetMapping("/index")
     public String getIndexJSP() {
@@ -17,8 +17,10 @@ public class MyController {
     }
 
     @RequestMapping("/askDetails")
-    public String askAboutClientsName() {
-        return "ask-name";
+    public String askAboutClientsName(Model model) {
+
+        model.addAttribute("client", new Client());
+        return "ask-details";
     }
 
 //    @RequestMapping("/showDetails")
@@ -27,11 +29,8 @@ public class MyController {
 //    }
 
     @RequestMapping("/showDetails")
-    public String showSelectedClient(@RequestParam("clientName") String clientName, Model model) {
-        clientName = "Mr." + clientName;
-        model.addAttribute("nameAttribute", clientName);
-        model.addAttribute("car", "and now you can choose your car!");
+    public String showSelectedClient(@ModelAttribute("client") Client client) {
 
-        return "show-clients-name";
+        return "show-clients-details";
     }
 }
