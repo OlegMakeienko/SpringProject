@@ -1,27 +1,51 @@
 package com.makeienko.springproject;
 
+import jakarta.validation.constraints.*;
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 public class Client {
+    @Size(min = 2, message = "Name must be minimum two symbols")
     private String name;
+    @NotBlank(message = "Surname is required field")
     private String surname;
+    @Min(value = 18, message = "You are to young")
     private int age;
+    @Pattern(regexp = "\\+[0-9]{2}[(][0-9]{2}[)][0-9]{7}", message = "please use patten +XX(XXX)XXXXXXX")
     private String phoneNumber;
     private String modelCar;
 
-    private Map<String, String> carsBrand;
+    private Map<String, String> carBrands;
 
     private String hireTerm;
 
+    private Map<String, String> hireTerms;
+
     private int timesFrame;
 
+    private String[] languages;
+
+    private Map<String, String> languageList;
+
     public Client() {
-        carsBrand = new HashMap<>();
-        carsBrand.put("Tesla Model 3", "T3");
-        carsBrand.put("BMW", "BMW");
-        carsBrand.put("Mercedes Benz class X", "MBenz");
-        carsBrand.put("Polestar 2", "PStar");
+        carBrands = new HashMap<>();
+        carBrands.put("Tesla Model 3", "T3");
+        carBrands.put("BMW", "BMW");
+        carBrands.put("Mercedes Benz class X", "MBenz");
+        carBrands.put("Polestar 2", "PStar");
+
+        hireTerms = new HashMap<>();
+        hireTerms.put("hour", "Hour");
+        hireTerms.put("day","Day");
+        hireTerms.put("week","Week");
+
+        languageList = new HashMap<>();
+        languageList.put("English", "EN");
+        languageList.put("Swedish", "SW");
+        languageList.put("Ukrainian", "UA");
     }
 
     public Client(String name, String surname, int age, String phoneNumber, String modelCar) {
@@ -42,64 +66,44 @@ public class Client {
                 '}';
     }
 
-    public int getTimesFrame() {
-        return timesFrame;
+    public void setLanguageList(Map<String, String> languageList) {
+        this.languageList = languageList;
+    }
+
+    public void setLanguages(String[] languages) {
+        this.languages = languages;
+    }
+
+    public void setHireTerms(Map<String, String> hireTerms) {
+        this.hireTerms = hireTerms;
     }
 
     public void setTimesFrame(int timesFrame) {
         this.timesFrame = timesFrame;
     }
 
-    public String getHireTerm() {
-        return hireTerm;
-    }
-
     public void setHireTerm(String hireTerm) {
         this.hireTerm = hireTerm;
     }
 
-    public Map<String, String> getCarsBrand() {
-        return carsBrand;
-    }
-
-    public void setCarsBrand(Map<String, String> carsBrand) {
-        this.carsBrand = carsBrand;
-    }
-
-    public String getName() {
-        return name;
+    public void setCarBrands(Map<String, String> carBrands) {
+        this.carBrands = carBrands;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getModelCar() {
-        return modelCar;
     }
 
     public void setModelCar(String modelCar) {

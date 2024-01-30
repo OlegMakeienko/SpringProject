@@ -1,8 +1,10 @@
 package com.makeienko.springproject.controller;
 
 import com.makeienko.springproject.Client;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +31,12 @@ public class ClientController {
 //    }
 
     @RequestMapping("/showDetails")
-    public String showSelectedClient(@ModelAttribute("client") Client client) {
+    public String showSelectedClient(@Valid @ModelAttribute("client") Client client, BindingResult br) {
 
-        return "show-clients-details";
+        if(br.hasErrors()) {
+            return "ask-details";
+        } else {
+            return "show-clients-details";
+        }
     }
 }
